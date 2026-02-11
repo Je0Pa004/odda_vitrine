@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --odda-blue: #1a367c;
+  --odda-orange: #ff7a1a;
+  --text-main: #1e293b;
+  --text-soft: #64748b;
+  --bg-light: #ffffff;
+  --bg-soft: #f8fafc;
+  --border: #e2e8f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Classic Section Padding */
+.section-padding {
+  @apply pt-[120px] md:pt-[160px] pb-20 md:pb-32;
+}
+
+/* Typography - Professional & Balanced */
+h1 {
+  @apply text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl font-bold text-slate-900 leading-snug;
+}
+
+h3 {
+  @apply text-xl md:text-2xl font-bold text-slate-900;
+}
+
+.sub-headline {
+  @apply text-lg md:text-xl text-slate-500 font-normal leading-relaxed max-w-2xl;
+}
+
+/* Standard Buttons */
+.btn-primary {
+  @apply bg-[#1a367c] text-white px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-[#162e6a] hover:shadow-md active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-secondary {
+  @apply bg-[#ff7a1a] text-white px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-[#e06915] hover:shadow-md active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-outline {
+  @apply border border-slate-200 text-slate-700 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-slate-50 flex items-center justify-center gap-2;
+}
+
+/* Classic Cards */
+.card-classic {
+  @apply bg-white border border-slate-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+/* Badge Corporate */
+.badge-classic {
+  @apply inline-flex items-center px-3 py-1 rounded bg-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-600 border border-slate-200;
+}
+
+/* Container */
+.container-custom {
+  @apply max-w-7xl mx-auto px-6;
+}
+
+/* Animations disabled */
+.animate-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Utilities */
+.text-odda-blue {
+  @apply text-[#1a367c];
+}
+
+.text-odda-orange {
+  @apply text-[#ff7a1a];
+}
+
+.bg-odda-blue {
+  @apply bg-[#1a367c];
+}
+
+.bg-odda-orange {
+  @apply bg-[#ff7a1a];
+}
+
+/* Dark Sections */
+.bg-corporate-dark {
+  @apply bg-[#0f172a] text-white;
+}
+
+.bg-corporate-dark h1,
+.bg-corporate-dark h2,
+.bg-corporate-dark h3 {
+  @apply text-white;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-reveal {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Fix for home page flash on refresh when another section is active */
+body[class*="section-"]:not(.is-ready) app-hero {
+  display: none !important;
+}

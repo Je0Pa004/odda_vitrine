@@ -1,0 +1,126 @@
+<section class="section-padding min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
+        <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-odda-blue/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-odda-orange/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container-custom relative z-10">
+        <div class="max-w-md mx-auto">
+            <!-- Logo & Title -->
+            <div class="text-center mb-10 animate-reveal">
+                <div class="flex items-center justify-center mb-6">
+                    <div class="flex items-end leading-none">
+                        <span class="text-4xl font-black text-odda-orange tracking-tight lowercase">odd</span>
+                        <div class="bg-odda-orange px-2 py-0.5 ml-0.5 rounded-sm">
+                            <span class="text-4xl font-black text-white uppercase italic">A</span>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Espace Admin</h2>
+                <p class="text-slate-500 mt-2 text-sm font-medium">Portail de gestion et d'administration.</p>
+            </div>
+
+            <!-- Login Card -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-10 animate-reveal"
+                style="animation-delay: 0.1s">
+                <form (ngSubmit)="onSubmit()" class="space-y-6">
+                    <!-- Email field -->
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Adresse
+                            Email</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" />
+                                </svg>
+                            </span>
+                            <input type="email" [(ngModel)]="loginData.email" name="email" required
+                                placeholder="votre&#64;email.com"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 text-sm outline-none focus:border-odda-blue focus:bg-white focus:ring-4 focus:ring-odda-blue/5 transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Password field -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Mot de
+                                Passe</label>
+                            <a href="#"
+                                class="text-[10px] font-bold text-odda-blue hover:text-odda-orange uppercase tracking-widest transition-colors">Oublié
+                                ?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </span>
+                            <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="loginData.password"
+                                name="password" required placeholder="••••••••"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-12 py-4 text-sm outline-none focus:border-odda-blue focus:bg-white focus:ring-4 focus:ring-odda-blue/5 transition-all">
+                            <button type="button" (click)="showPassword = !showPassword"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                                <svg *ngIf="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <svg *ngIf="showPassword" class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember"
+                            class="w-4 h-4 text-odda-blue border-slate-300 rounded focus:ring-odda-blue">
+                        <label for="remember"
+                            class="ml-2 text-xs font-bold text-slate-500 uppercase tracking-widest cursor-pointer">Se
+                            souvenir de moi</label>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" [disabled]="isSubmitting"
+                        class="btn-primary w-full py-5 rounded-xl text-xs uppercase tracking-[0.2em] font-black group">
+                        <span *ngIf="!isSubmitting" class="flex items-center justify-center gap-2">
+                            Se Connecter
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <span *ngIf="isSubmitting">Authentification...</span>
+                    </button>
+                </form>
+
+                <div *ngIf="errorMessage" class="mt-4 text-center">
+                    <div class="inline-block bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+
+                <!-- Back to site -->
+                <div class="mt-8 text-center pt-8 border-t border-slate-50">
+                    <button (click)="onNavClick('hero')"
+                        class="text-[10px] font-black text-slate-400 hover:text-odda-blue uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 mx-auto">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Retour au Site
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

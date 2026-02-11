@@ -1,0 +1,79 @@
+<section class="section-padding bg-slate-50">
+    <div class="container-custom">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20 space-y-4 animate-reveal">
+            <span class="badge-classic text-odda-blue">Portfolio & Impact</span>
+            <h2>Réalisations Stratégiques.</h2>
+            <p class="sub-headline mx-auto">
+                Découvrez comment nous aidons nos partenaires à dépasser leurs objectifs grâce à la technologie.
+            </p>
+        </div>
+
+        <!-- Cases Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Project 1 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 animate-reveal group">
+                <div class="aspect-video bg-slate-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070"
+                        alt="Dashboard"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="p-10 space-y-6">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-1">
+                            <h3 class="text-2xl font-bold">SM-WEB National</h3>
+                            <p class="text-xs font-bold text-odda-blue uppercase tracking-widest">Secteur Éducation</p>
+                        </div>
+                        <div class="px-4 py-2 bg-blue-50 text-odda-blue rounded-lg text-xs font-bold">LIVRÉ</div>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Digitalisation complète du système de gestion des notes et de la facturation pour plus de 50
+                        établissements répartis sur le territoire national.
+                    </p>
+                    <div class="pt-6 border-t border-slate-50 flex justify-between items-center">
+                        <div class="flex gap-4">
+                            <span class="text-[10px] font-bold text-slate-400">#Java</span>
+                            <span class="text-[10px] font-bold text-slate-400">#Angular</span>
+                            <span class="text-[10px] font-bold text-slate-400">#AWS</span>
+                        </div>
+                        <button class="text-odda-blue font-bold text-xs uppercase hover:underline"
+                            (click)="onNavClick('contact')">Consulter le Case Study</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 animate-reveal group"
+                style="animation-delay: 0.2s">
+                <div class="aspect-video bg-slate-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=2070"
+                        alt="Server room"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="p-10 space-y-6">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-1">
+                            <h3 class="text-2xl font-bold">Infrastructure Tier III</h3>
+                            <p class="text-xs font-bold text-odda-orange uppercase tracking-widest">Secteur Corporate
+                            </p>
+                        </div>
+                        <div class="px-4 py-2 bg-orange-50 text-odda-orange rounded-lg text-xs font-bold">ACTIF</div>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Conception et déploiement d'une architecture réseau redondante et sécurisée pour un grand groupe
+                        industriel togolais.
+                    </p>
+                    <div class="pt-6 border-t border-slate-50 flex justify-between items-center">
+                        <div class="flex gap-4">
+                            <span class="text-[10px] font-bold text-slate-400">#Cisco</span>
+                            <span class="text-[10px] font-bold text-slate-400">#Security</span>
+                            <span class="text-[10px] font-bold text-slate-400">#Fiber</span>
+                        </div>
+                        <button class="text-odda-orange font-bold text-xs uppercase hover:underline"
+                            (click)="onNavClick('contact')">Voir les détails</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

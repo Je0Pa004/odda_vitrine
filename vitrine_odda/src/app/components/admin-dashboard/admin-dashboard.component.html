@@ -1,0 +1,637 @@
+<div class="min-h-screen bg-slate-50 flex font-sans text-slate-900">
+
+    <!-- Sidebar -->
+    <aside
+        class="w-72 bg-[#1a367c] text-white flex flex-col fixed top-0 left-0 h-full shadow-2xl z-40 overflow-y-auto no-scrollbar">
+        <div class="p-8 border-b border-white/10 flex items-center gap-4 bg-[#14295e]">
+            <div class="bg-white p-2 rounded-lg shadow-inner">
+                <img src="/images/odda_logo.webp" alt="OD" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+                <h2 class="text-lg font-black uppercase tracking-tighter text-white">Odda Admin</h2>
+                <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 bg-[#ff7a1a] rounded-full animate-pulse"></div>
+                    <p class="text-[9px] font-bold text-white/50 uppercase tracking-widest leading-none">Console de
+                        gestion</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-6 space-y-2 mt-4">
+            <button (click)="activeTab = 'overview'"
+                [ngClass]="{'bg-[#24418a] text-white': activeTab === 'overview', 'text-white/60': activeTab !== 'overview'}"
+                class="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl hover:bg-white/5 transition-all duration-300 text-xs font-black uppercase tracking-widest group">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Dashboard
+            </button>
+            <button (click)="activeTab = 'announcements'"
+                [ngClass]="{'bg-[#24418a] text-white': activeTab === 'announcements', 'text-white/60': activeTab !== 'announcements'}"
+                class="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl hover:bg-white/5 transition-all duration-300 text-xs font-black uppercase tracking-widest group">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                </svg>
+                Annonces
+            </button>
+            <button (click)="activeTab = 'requests'"
+                [ngClass]="{'bg-[#24418a] text-white': activeTab === 'requests', 'text-white/60': activeTab !== 'requests'}"
+                class="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl hover:bg-white/5 transition-all duration-300 text-xs font-black uppercase tracking-widest group">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                Candidatures
+            </button>
+        </nav>
+
+        <div class="p-6 border-t border-white/10 bg-[#14295e]/50">
+            <button (click)="onNavClick('hero')"
+                class="w-full flex items-center justify-center gap-3 px-5 py-4 text-[10px] font-black uppercase tracking-widest text-[#ff7a1a] hover:bg-[#ff7a1a] hover:text-white transition-all rounded-xl border border-[#ff7a1a]/30">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Retour au Site
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-72 p-10 min-h-screen">
+
+        <!-- HEADER -->
+        <header
+            class="flex justify-between items-center mb-12 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <div class="space-y-1">
+                <h1 class="text-3xl font-black text-[#1a367c] uppercase tracking-tighter leading-none">
+                    {{ activeTab === 'overview' ? 'Tableau de bord' : (activeTab === 'announcements' ? 'Gestion des
+                    Annonces' : 'Suivi des Candidatures') }}
+                </h1>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-1 h-1 bg-[#ff7a1a] rounded-full"></span>
+                    {{ activeTab === 'overview' ? 'Statistiques globales' : (activeTab === 'announcements' ? 'Publiez et
+                    modifiez vos offres' : 'Traitement des dossiers de stage') }}
+                </p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-[11px] font-black text-[#1a367c] uppercase">Admin Odda</p>
+                    <p class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest">Connecté</p>
+                </div>
+                <div
+                    class="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Admin+Odda&background=1a367c&color=ffffff" alt="Admin">
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD OVERVIEW -->
+        <div *ngIf="activeTab === 'overview'" class="space-y-8 animate-reveal">
+            <!-- KPI Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- KPI Card 1 -->
+                <div
+                    class="bg-white p-8 rounded-[1.5rem] shadow-sm border border-slate-100 group transition-all duration-300 hover:border-[#ff7a1a]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-50 text-[#1a367c] flex items-center justify-center group-hover:bg-[#1a367c] group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Total</span>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-black text-[#1a367c] mb-1">{{ kpis.totalAnnouncements }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Annonces
+                            Actives</p>
+                    </div>
+                </div>
+
+                <!-- KPI Card 2 -->
+                <div
+                    class="bg-white p-8 rounded-[1.5rem] shadow-sm border border-slate-100 group transition-all duration-300 hover:border-[#ff7a1a]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-50 text-[#ff7a1a] flex items-center justify-center group-hover:bg-[#ff7a1a] group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Global</span>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-black text-[#1a367c] mb-1">{{ kpis.totalRequests }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                            Candidatures</p>
+                    </div>
+                </div>
+
+                <!-- KPI Card 3 -->
+                <div
+                    class="bg-white p-8 rounded-[1.5rem] shadow-sm border border-slate-100 group transition-all duration-300 hover:border-[#ff7a1a]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-slate-50 text-slate-600 flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Urgent</span>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-black text-[#1a367c] mb-1">{{ kpis.pendingRequests }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">En
+                            attente</p>
+                    </div>
+                </div>
+
+                <!-- KPI Card 4 -->
+                <div
+                    class="bg-white p-8 rounded-[1.5rem] shadow-sm border border-slate-100 group transition-all duration-300 hover:border-[#ff7a1a]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Succès</span>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-black text-[#1a367c] mb-1">{{ kpis.approvedRequests }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Validés
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts / Recent Activity Placeholder -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100">
+                    <div class="flex items-center justify-between mb-10 pb-6 border-b border-slate-50">
+                        <h3 class="text-sm font-black text-[#1a367c] uppercase tracking-widest">Activité Récente</h3>
+                        <button
+                            class="text-[9px] font-black text-[#ff7a1a] uppercase tracking-widest hover:underline">Accéder
+                            aux détails</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div *ngFor="let req of requests.slice(0, 4)"
+                            class="flex items-center gap-6 p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-slate-50 text-[#1a367c] flex items-center justify-center font-black uppercase text-sm border border-slate-100 group-hover:bg-white group-hover:border-[#ff7a1a] transition-all">
+                                {{ req.name.charAt(0) }}</div>
+                            <div class="flex-1">
+                                <p class="text-xs font-black text-slate-800 uppercase tracking-tight">{{ req.name }} {{
+                                    req.firstName }}</p>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{{ req.type ===
+                                    'Internship' ? 'Stage' : 'Formation' }}</p>
+                            </div>
+                            <div class="text-right">
+                                <span
+                                    class="px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest inline-block mb-1"
+                                    [ngClass]="{
+                                        'bg-amber-100 text-amber-700': req.status === 'Pending',
+                                        'bg-[#1a367c] text-white': req.status === 'Approved',
+                                        'bg-red-100 text-red-700': req.status === 'Rejected'
+                                    }">
+                                    {{ req.status }}
+                                </span>
+                                <p class="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">{{ req.date }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-[#1a367c] p-10 rounded-[2rem] shadow-2xl text-white flex flex-col justify-between border-b-8 border-[#ff7a1a]">
+                    <div class="space-y-10">
+                        <div>
+                            <h3 class="text-xl font-black uppercase tracking-tighter mb-1">Odda Console</h3>
+                            <p class="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em] mb-8">Infrastructure
+                            </p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                                <p class="text-[9px] font-bold text-white/30 uppercase tracking-widest mb-1.0">Statut
+                                    Réseau</p>
+                                <div class="flex items-center gap-2">
+                                    <div
+                                        class="w-2 h-2 rounded-full bg-[#ff7a1a] shadow-[0_0_8px_rgba(255,122,26,0.5)]">
+                                    </div>
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-white">Actif
+                                        (v1.0)</span>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                                <p class="text-[9px] font-bold text-white/30 uppercase tracking-widest mb-1.0">Dernière
+                                    mise à jour</p>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-white/80">Synchronisé le
+                                    {{ (requests.length > 0 ? requests[0].date : '') || '12/02/2026' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button (click)="loadAnnouncements(); loadRequests()"
+                        class="w-full py-5 bg-[#ff7a1a] hover:bg-white hover:text-[#ff7a1a] text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-xl shadow-orange-900/20 mt-10">
+                        Forcer la synchronisation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANNOUNCEMENTS VIEW -->
+        <div *ngIf="activeTab === 'announcements'" class="space-y-10 animate-reveal">
+
+            <!-- Creation Form -->
+            <div class="bg-white p-10 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-[#ff7a1a]/5 -mr-16 -mt-16 rounded-full blur-3xl opacity-50">
+                </div>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-1.5 h-6 bg-[#ff7a1a] rounded-full"></div>
+                    <h3 class="text-lg font-black text-[#1a367c] uppercase tracking-tight">Nouvelle Publication</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Titre de
+                            l'annonce</label>
+                        <input [(ngModel)]="newAnnouncement.title" type="text"
+                            placeholder="Ex: Recrutement Développeur Senior"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold focus:ring-2 focus:ring-[#1a367c] focus:border-transparent transition-all outline-none">
+                    </div>
+                    <div class="space-y-2">
+                        <label
+                            class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Catégorie</label>
+                        <select [(ngModel)]="newAnnouncement.category"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold focus:ring-2 focus:ring-[#1a367c] focus:border-transparent transition-all outline-none appearance-none cursor-pointer">
+                            <option value="info">Offre d'emploi</option>
+                            <option value="event">Événement</option>
+                            <option value="update">Mise à jour</option>
+                            <option value="promo">Promotion</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2 space-y-2">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Photo de
+                            l'annonce (Optionnel)</label>
+                        <input type="file" (change)="onFileSelected($event)" accept="image/*"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:bg-[#1a367c] file:text-white hover:file:bg-[#24418a] transition-all outline-none">
+                    </div>
+                    <div class="md:col-span-2 space-y-2">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Contenu de
+                            l'annonce</label>
+                        <textarea [(ngModel)]="newAnnouncement.description" rows="4" placeholder="Détails de l'offre..."
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold focus:ring-2 focus:ring-[#1a367c] focus:border-transparent transition-all outline-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <button (click)="addAnnouncement()"
+                        class="bg-[#ff7a1a] text-white px-12 py-5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[#1a367c] transition-all duration-500 shadow-lg shadow-orange-900/10">
+                        Publier sur le site
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div *ngFor="let item of announcements"
+                    class="group bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:border-[#1a367c]">
+
+                    <div class="p-8 space-y-6">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest text-white"
+                                [ngClass]="{
+                                  'bg-[#1a367c]': item.category === 'info',
+                                  'bg-purple-600': item.category === 'event',
+                                  'bg-[#ff7a1a]': item.category === 'update',
+                                  'bg-red-600': item.category === 'promo'
+                                }">
+                                {{ item.category }}
+                            </span>
+                            <span class="text-[9px] font-bold text-slate-300">{{ item.date }}</span>
+                        </div>
+
+                        <div *ngIf="item.imageUrl"
+                            class="w-full h-48 overflow-hidden rounded-xl border border-slate-50">
+                            <img [src]="item.imageUrl" [alt]="item.title"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+
+                        <div class="space-y-3">
+                            <h4
+                                class="text-sm font-black text-slate-800 tracking-tight leading-tight group-hover:text-[#1a367c] uppercase transition-colors">
+                                {{ item.title }}</h4>
+                            <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-3 italic opacity-60">"{{
+                                item.description }}"</p>
+                        </div>
+
+                        <div class="pt-6 flex items-center justify-between border-t border-slate-50">
+                            <button (click)="viewAnnouncement(item)"
+                                class="text-[9px] font-black uppercase tracking-widest text-[#1a367c] hover:text-[#ff7a1a] transition-colors">Visualiser</button>
+                            <div class="flex gap-2">
+                                <button (click)="openEditModal(item, 'announcement')"
+                                    class="w-9 h-9 rounded-lg bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-blue-50 hover:text-[#1a367c] transition-all border border-slate-100">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </button>
+                                <button (click)="confirmDelete(item, 'announcement')"
+                                    class="w-9 h-9 rounded-lg bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-all border border-slate-100">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REQUESTS VIEW -->
+        <div *ngIf="activeTab === 'requests'" class="space-y-10 animate-reveal">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div *ngFor="let req of requests"
+                    class="group bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:border-[#1a367c]">
+
+                    <div class="p-8 space-y-6">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="px-4 py-1.5 rounded-lg text-[8px] font-black tracking-widest uppercase border transition-all"
+                                [ngClass]="{
+                                  'bg-amber-50 border-amber-200 text-amber-600': req.status === 'Pending',
+                                  'bg-[#1a367c]/5 border-[#1a367c]/20 text-[#1a367c]': req.status === 'Approved',
+                                  'bg-red-50 border-red-200 text-red-600': req.status === 'Rejected'
+                                }">
+                                {{ req.status === 'Pending' ? 'En Attente' : (req.status === 'Approved' ? 'Dossier
+                                Validé' : 'Refusé') }}
+                            </span>
+                            <div class="text-right">
+                                <span class="text-[9px] font-black text-[#ff7a1a] uppercase tracking-tighter">{{
+                                    req.type === 'Internship' ? 'STAGE' : 'FORMATION' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-14 h-14 rounded-xl bg-slate-50 text-[#1a367c] flex items-center justify-center font-black text-lg border border-slate-100 shadow-sm uppercase group-hover:bg-[#1a367c] group-hover:text-white transition-all">
+                                {{ req.name.charAt(0) }}
+                            </div>
+                            <div>
+                                <h4
+                                    class="text-sm font-black text-slate-800 uppercase tracking-tight group-hover:text-[#1a367c] transition-colors">
+                                    {{ req.name }} {{ req.firstName }}</h4>
+                                <p class="text-[10px] font-bold text-slate-400">{{ req.email }}</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 grid grid-cols-2 gap-3">
+                            <button (click)="viewRequestDetails(req)"
+                                class="col-span-2 py-4 bg-slate-50 text-slate-700 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-100 transition-all border border-slate-100">
+                                Examiner le dossier
+                            </button>
+                            <button *ngIf="req.status === 'Pending'" (click)="updateRequestStatus(req.id, 'Approved')"
+                                class="py-3.5 bg-[#1a367c] text-white rounded-xl text-[8px] font-black uppercase tracking-widest hover:bg-[#24418a] transition-all">
+                                Approuver
+                            </button>
+                            <button *ngIf="req.status === 'Pending'" (click)="updateRequestStatus(req.id, 'Rejected')"
+                                class="py-3.5 bg-red-600 text-white rounded-xl text-[8px] font-black uppercase tracking-widest hover:bg-red-700 transition-all">
+                                Rejeter
+                            </button>
+                            <button (click)="confirmDelete(req, 'request')"
+                                class="col-span-2 mt-2 text-[8px] font-black uppercase tracking-widest text-slate-300 hover:text-red-600 transition-colors">
+                                Archiver définitivement
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- --- MODALS (DIALOGS) --- -->
+
+    <!-- Backdrop -->
+    <div *ngIf="showDetailsModal || showEditModal || showDeleteModal" (click)="closeAllModals()"
+        class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] animate-fade-in pointer-events-auto transition-all">
+    </div>
+
+    <!-- Details Modal -->
+    <div *ngIf="showDetailsModal"
+        class="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
+        <div
+            class="pointer-events-auto w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-reveal p-0 overflow-y-auto max-h-[90vh] no-scrollbar">
+
+            <!-- Close Button (Universal) -->
+            <button (click)="closeDetailsModal()"
+                class="absolute top-6 right-6 z-10 w-10 h-10 rounded-xl bg-white/80 backdrop-blur-sm text-slate-400 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-all shadow-sm border border-slate-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- CASE: Request Details -->
+            <div *ngIf="modalType === 'request'" class="p-10 space-y-8">
+                <div class="space-y-1">
+                    <span class="text-[9px] font-black uppercase tracking-[0.2em] text-[#ff7a1a]">Fiche Candidat</span>
+                    <h3 class="text-2xl font-black text-[#1a367c] uppercase tracking-tighter">{{ selectedItem?.name }}
+                        {{ selectedItem?.firstName }}</h3>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                    <div class="space-y-1">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Niveau d'étude</p>
+                        <p class="text-xs font-bold text-slate-700 uppercase">{{ selectedItem?.level }}</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Établissement</p>
+                        <p class="text-xs font-bold text-slate-700 uppercase">{{ selectedItem?.university }}</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Contact Email</p>
+                        <p class="text-xs font-bold text-slate-700">{{ selectedItem?.email }}</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Téléphone</p>
+                        <p class="text-xs font-bold text-slate-700">{{ selectedItem?.telephone }}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-1 h-4 bg-[#1a367c] rounded-full"></div>
+                        <h4 class="text-[10px] font-black text-slate-800 uppercase tracking-widest">Lettre de Motivation
+                        </h4>
+                    </div>
+                    <p
+                        class="text-xs text-slate-500 leading-relaxed italic bg-slate-50/50 p-6 rounded-xl border border-dashed border-slate-200">
+                        "{{ selectedItem?.motivation || 'Aucune lettre de motivation fournie.' }}"
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a *ngIf="selectedItem?.cv" [href]="selectedItem.cv" target="_blank"
+                        class="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[#1a367c] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#24418a] transition-all group">
+                        <svg class="w-4 h-4 text-[#ff7a1a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Consulter le CV
+                    </a>
+                    <a *ngIf="selectedItem?.letter" [href]="selectedItem.letter" target="_blank"
+                        class="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 text-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:border-[#1a367c] transition-all">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        Recommandation
+                    </a>
+                </div>
+            </div>
+
+            <!-- CASE: Announcement Details -->
+            <div *ngIf="modalType === 'announcement'" class="space-y-0">
+                <!-- Cover Image -->
+                <div class="relative h-64 w-full bg-slate-100">
+                    <img *ngIf="selectedItem?.imageUrl" [src]="selectedItem.imageUrl"
+                        class="w-full h-full object-cover">
+                    <div *ngIf="!selectedItem?.imageUrl" class="w-full h-full flex items-center justify-center">
+                        <svg class="w-20 h-20 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="absolute bottom-6 left-6 flex gap-2">
+                        <span
+                            class="px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest text-white shadow-lg"
+                            [ngClass]="{
+                                'bg-[#1a367c]': selectedItem?.category === 'info',
+                                'bg-purple-600': selectedItem?.category === 'event',
+                                'bg-[#ff7a1a]': selectedItem?.category === 'update',
+                                'bg-red-600': selectedItem?.category === 'promo'
+                            }">
+                            {{ selectedItem?.category }}
+                        </span>
+                        <span
+                            class="px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest bg-white/90 backdrop-blur-sm text-slate-500 shadow-sm">
+                            {{ selectedItem?.date }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-10 space-y-8">
+                    <div class="space-y-4">
+                        <h3 class="text-3xl font-black text-[#1a367c] uppercase tracking-tighter leading-none">{{
+                            selectedItem?.title }}</h3>
+                        <div class="w-12 h-1.5 bg-[#ff7a1a] rounded-full"></div>
+                    </div>
+
+                    <div class="prose prose-slate max-w-none">
+                        <p class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap italic">
+                            {{ selectedItem?.description }}
+                        </p>
+                    </div>
+
+                    <div class="pt-6 flex gap-3 border-t border-slate-50">
+                        <button (click)="openEditModal(selectedItem, 'announcement'); closeDetailsModal()"
+                            class="flex-1 py-4 bg-slate-50 text-[#1a367c] rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-blue-50 transition-all border border-slate-100 flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Modifier cette annonce
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div *ngIf="showEditModal" class="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
+        <div class="pointer-events-auto w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-reveal">
+            <div class="p-10 space-y-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-1.5 h-6 bg-[#ff7a1a] rounded-full"></div>
+                    <h3 class="text-lg font-black text-[#1a367c] uppercase tracking-tight">Modifier la publication</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Titre</label>
+                        <input [(ngModel)]="editItem.title" type="text"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold focus:ring-2 focus:ring-[#1a367c] outline-none transition-all">
+                    </div>
+                    <div class="space-y-2">
+                        <label
+                            class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Description</label>
+                        <textarea [(ngModel)]="editItem.description" rows="5"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold focus:ring-2 focus:ring-[#1a367c] outline-none transition-all"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Modifier la
+                            photo (Optionnel)</label>
+                        <input type="file" (change)="onEditFileSelected($event)" accept="image/*"
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-xs font-bold file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:bg-[#ff7a1a] file:text-white hover:file:bg-orange-600 transition-all outline-none">
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-4">
+                    <button (click)="showEditModal = false"
+                        class="flex-1 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-all">Annuler</button>
+                    <button (click)="saveEdit()"
+                        class="flex-[2] py-4 bg-[#1a367c] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#24418a] transition-all shadow-lg shadow-blue-900/20">Enregistrer
+                        les modifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div *ngIf="showDeleteModal" class="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
+        <div
+            class="pointer-events-auto w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden animate-reveal text-center">
+            <div class="p-10 space-y-6">
+                <div
+                    class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-sm">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-xl font-black text-[#1a367c] uppercase tracking-tight">Suppression</h3>
+                    <p class="text-[11px] font-bold text-slate-400 px-4">Cette action est définitive. Souhaitez-vous
+                        vraiment retirer cet élément du système ?</p>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button (click)="closeDeleteModal()"
+                        class="flex-1 py-4 bg-slate-50 text-slate-500 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-100 transition-all border border-slate-100">
+                        Annuler
+                    </button>
+                    <button (click)="executeDelete()"
+                        class="flex-1 py-4 bg-red-600 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-lg shadow-red-900/20">
+                        Confirmer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

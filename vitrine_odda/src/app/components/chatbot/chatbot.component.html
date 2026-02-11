@@ -1,0 +1,67 @@
+<div class="fixed bottom-10 right-10 z-[100] flex flex-col items-end gap-6">
+    <!-- Chat Window -->
+    <div *ngIf="isOpen"
+        class="w-[380px] md:w-[420px] h-[550px] bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col animate-reveal">
+
+        <!-- Header -->
+        <div class="bg-odda-blue p-6 flex justify-between items-center text-white">
+            <div class="flex items-center gap-4">
+                <div class="w-8 h-8 bg-white rounded flex items-center justify-center text-odda-blue font-bold">O</div>
+                <div>
+                    <h4 class="text-sm font-bold leading-none">Support Odda Tech</h4>
+                    <p class="text-[10px] text-blue-200 mt-1 uppercase tracking-widest font-bold">En ligne</p>
+                </div>
+            </div>
+            <button (click)="toggleChat()" class="p-2 hover:bg-white/10 rounded transition-colors text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50 no-scrollbar" #scrollContainer>
+            <div *ngFor="let msg of messages" class="flex" [class.justify-end]="msg.role === 'user'">
+                <div class="max-w-[85%] px-4 py-3 text-sm leading-relaxed rounded-lg" [ngClass]="{
+                        'bg-white text-slate-700 border border-slate-200 shadow-sm': msg.role === 'ai',
+                        'bg-odda-blue text-white shadow-md': msg.role === 'user'
+                    }">
+                    {{ msg.text }}
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div *ngIf="isLoading" class="flex">
+                <div class="bg-white px-4 py-3 rounded-lg border border-slate-200 shadow-sm flex gap-2 items-center">
+                    <div class="w-1.5 h-1.5 bg-odda-blue rounded-full animate-bounce"></div>
+                    <div class="w-1.5 h-1.5 bg-odda-blue rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                    <div class="w-1.5 h-1.5 bg-odda-blue rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-4 bg-white border-t border-slate-100">
+            <form (ngSubmit)="sendMessage()" class="flex gap-3">
+                <input type="text" [(ngModel)]="userInput" name="userInput" placeholder="Posez votre question..."
+                    class="flex-1 bg-slate-50 border border-slate-200 rounded px-4 py-3 text-sm outline-none focus:border-odda-blue transition-all">
+                <button type="submit" [disabled]="!userInput.trim() || isLoading"
+                    class="bg-odda-blue w-12 h-12 rounded flex items-center justify-center text-white disabled:opacity-50 hover:bg-[#162e6a] transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button (click)="toggleChat()" [class.scale-0]="isOpen" [class.scale-100]="!isOpen"
+        class="w-16 h-16 bg-odda-blue rounded-full flex items-center justify-center shadow-xl text-white transition-all transform hover:scale-110 active:scale-95 duration-500">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </button>
+</div>

@@ -1,0 +1,198 @@
+<section class="section-padding bg-slate-50">
+    <div class="container-custom">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+
+            <!-- Pitch Sidebar -->
+            <div class="lg:col-span-4 space-y-8 animate-reveal">
+                <div class="space-y-4">
+                    <span class="badge-classic text-odda-blue">Formation & Carrière</span>
+                    <h2>Boostez Votre Avenir.</h2>
+                    <p class="text-slate-500 leading-relaxed italic">
+                        "Que ce soit pour un stage ou une formation spécialisée, nous vous accompagnons vers
+                        l'excellence."
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex gap-4">
+                        <div
+                            class="w-10 h-10 bg-blue-50 rounded flex items-center justify-center text-odda-blue flex-shrink-0">
+                            <span class="font-bold">01</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-700">Mentorat par des experts seniors (Spring Boot,
+                            Angular).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex gap-4">
+                        <div
+                            class="w-10 h-10 bg-orange-50 rounded flex items-center justify-center text-odda-orange flex-shrink-0">
+                            <span class="font-bold">02</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-700">Immersion sur des projets réels à impact national.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-8 bg-odda-blue text-white rounded-xl shadow-lg">
+                    <p class="text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Opportunité</p>
+                    <p class="text-2xl font-bold">Stage & Formation</p>
+                    <p class="text-xs mt-4 leading-relaxed opacity-80">Les candidatures sont ouvertes toute l'année pour
+                        les profils motivés.</p>
+                </div>
+            </div>
+
+            <!-- Application Form Card -->
+            <div class="lg:col-span-8 animate-reveal" style="animation-delay: 0.2s">
+                <div class="bg-white rounded-xl p-10 md:p-16 shadow-xl border border-slate-100">
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold mb-2">Formulaire de Demande</h3>
+                        <p class="text-slate-500 text-sm">Veuillez remplir le formulaire ci-dessous avec précision.</p>
+                    </div>
+
+                    <form (ngSubmit)="onSubmit()" class="space-y-10">
+                        <!-- Messages -->
+                        <div *ngIf="successMessage" class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+                            {{ successMessage }}
+                        </div>
+                        <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                            {{ errorMessage }}
+                        </div>
+
+                        <!-- Request Type Selector -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="requestType" value="internship"
+                                    [(ngModel)]="formData.requestType" class="peer sr-only">
+                                <div
+                                    class="rounded-lg border-2 border-slate-200 p-4 text-center hover:border-blue-200 peer-checked:border-odda-blue peer-checked:bg-blue-50 transition-all">
+                                    <div class="font-bold text-slate-700 peer-checked:text-odda-blue">Demande de Stage
+                                    </div>
+                                    <div class="text-xs text-slate-400 mt-1">Stage académique ou pro</div>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="requestType" value="training"
+                                    [(ngModel)]="formData.requestType" class="peer sr-only">
+                                <div
+                                    class="rounded-lg border-2 border-slate-200 p-4 text-center hover:border-orange-200 peer-checked:border-odda-orange peer-checked:bg-orange-50 transition-all">
+                                    <div class="font-bold text-slate-700 peer-checked:text-odda-orange">Formation
+                                        Payante</div>
+                                    <div class="text-xs text-slate-400 mt-1">Certification & Expertise</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Select Announcement (Optional) -->
+                        <div class="space-y-2" *ngIf="announcements.length > 0">
+                            <label class="text-xs font-bold text-slate-700">Annonce (Optionnel)</label>
+                            <select [(ngModel)]="formData.offreEmploiTrackingId" name="offreEmploiTrackingId"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all appearance-none">
+                                <option value="">-- Sélectionnez une annonce --</option>
+                                <option *ngFor="let ann of announcements" [value]="ann.trackingId">{{ ann.titre }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Identity -->
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-300">1.
+                                    Identité</span>
+                                <div class="h-px flex-1 bg-slate-100"></div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Nom</label>
+                                    <input type="text" [(ngModel)]="formData.lastName" name="lastName"
+                                        placeholder="ex: AFANOU" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Prénom</label>
+                                    <input type="text" [(ngModel)]="formData.firstName" name="firstName"
+                                        placeholder="ex: Koffi" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Communication & Academic -->
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-300">2. Contact
+                                    & Cursus</span>
+                                <div class="h-px flex-1 bg-slate-100"></div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Email Professionnel</label>
+                                    <input type="email" [(ngModel)]="formData.email" name="email"
+                                        placeholder="koffi&#64;ecole.tg" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Téléphone</label>
+                                    <input type="tel" [(ngModel)]="formData.phone" name="phone"
+                                        placeholder="+228 XX XX XX XX" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Université / Institut</label>
+                                    <input type="text" [(ngModel)]="formData.school" name="school"
+                                        placeholder="ex: UL, IAEC, ESIBA" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Niveau d'étude</label>
+                                    <select [(ngModel)]="formData.level" name="level" required
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all appearance-none">
+                                        <option value="" disabled selected>Sélectionnez votre niveau</option>
+                                        <option *ngFor="let lvl of levels" [value]="lvl">{{ lvl }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documents -->
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-300">3.
+                                    Documents (PDF)</span>
+                                <div class="h-px flex-1 bg-slate-100"></div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Curriculum Vitae (CV)</label>
+                                    <input type="file" (change)="onFileChange($event, 'cv')" accept="application/pdf"
+                                        required
+                                        class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-odda-blue hover:file:bg-blue-100 cursor-pointer">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-700">Lettre de Rec. (Optionnel)</label>
+                                    <input type="file" (change)="onFileChange($event, 'recommendationLetter')"
+                                        accept="application/pdf"
+                                        class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-slate-50 file:text-slate-600 hover:file:bg-slate-100 cursor-pointer">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Motivation -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-700">Pourquoi Odda Technology ?</label>
+                            <textarea [(ngModel)]="formData.motivation" name="motivation" rows="4"
+                                placeholder="Dites-nous ce qui vous motive à travailler avec Spring Boot ou Angular..."
+                                required
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm outline-none focus:border-odda-blue focus:bg-white transition-all resize-none"></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button type="submit" [disabled]="isSubmitting"
+                                class="btn-primary w-full py-5 text-sm uppercase tracking-widest font-bold">
+                                {{ isSubmitting ? 'Envoi en cours...' : 'Transmettre ma Candidature' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

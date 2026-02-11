@@ -1,0 +1,176 @@
+<section class="section-padding bg-white">
+    <div class="container-custom">
+        <!-- 1. LIST VIEW -->
+        <div *ngIf="!selectedAnnouncement" class="animate-reveal">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
+                <div class="space-y-4">
+                    <span class="badge-classic text-odda-blue">Média & Actualités</span>
+                    <h2>Informations <br /> & Innovations.</h2>
+                </div>
+                <p class="text-slate-500 max-w-sm font-medium">
+                    Suivez les dernières tendances technologiques et l'actualité de nos projets au Togo.
+                </p>
+            </div>
+
+            <!-- Loading & Messages -->
+            <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+                <div class="text-slate-500">Chargement des annonces...</div>
+            </div>
+            <div *ngIf="errorMessage && !isLoading" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
+                <p class="text-red-700 text-sm">{{ errorMessage }}</p>
+            </div>
+            <div *ngIf="!isLoading && announcements.length === 0 && !errorMessage" class="text-center py-12">
+                <p class="text-slate-500">Aucune annonce disponible pour le moment.</p>
+            </div>
+
+            <!-- Grid -->
+            <div *ngIf="!isLoading && announcements.length > 0"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div *ngFor="let announcement of announcements"
+                    class="card-classic flex flex-col justify-between h-full">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="badge-classic">
+                                {{ getCategoryLabel(announcement.category) }}
+                            </span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{
+                                announcement.date }}</span>
+                        </div>
+
+                        <!-- Image -->
+                        <div *ngIf="announcement.imageUrl"
+                            class="relative group h-48 overflow-hidden rounded-xl bg-slate-100">
+                            <img [src]="announcement.imageUrl" [alt]="announcement.title"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+
+                        <h3 class="text-xl font-bold leading-tight hover:text-odda-blue transition-colors">
+                            {{ announcement.title }}
+                        </h3>
+                        <p class="text-sm text-slate-500 leading-relaxed line-clamp-3">
+                            {{ announcement.description }}
+                        </p>
+                    </div>
+
+                    <div (click)="openDetails(announcement)"
+                        class="pt-8 flex items-center gap-4 text-odda-blue font-bold text-xs uppercase cursor-pointer hover:underline group">
+                        Lire la suite
+                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Classic -->
+            <div class="mt-20 bg-slate-50 p-10 md:p-16 rounded-2xl border border-slate-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-12 text-center mb-4">
+                        <h3 class="text-2xl font-bold mb-4">Abonnez-vous à notre Newsletter</h3>
+                        <p class="text-slate-500 max-w-xl mx-auto">Recevez nos dernières analyses technologiques
+                            directement dans votre boîte mail.</p>
+                    </div>
+                    <div class="lg:col-span-12 max-w-2xl mx-auto w-full flex flex-col sm:flex-row gap-4">
+                        <input type="email" placeholder="votre@adresse-mail.com"
+                            class="flex-1 bg-white border border-slate-200 rounded-lg px-6 py-4 text-sm outline-none focus:border-odda-blue transition-all">
+                        <button class="btn-primary py-4 px-10">S'abonner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DETAIL VIEW -->
+        <div *ngIf="selectedAnnouncement" class="animate-reveal">
+            <!-- Back Navigation -->
+            <button (click)="closeDetails()" class="btn-outline mb-10 group">
+                <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                </svg>
+                Retour aux actualités
+            </button>
+
+            <!-- Article Structure -->
+            <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm">
+                <!-- Banner Image -->
+                <div class="w-full h-80 md:h-[450px] bg-slate-50 relative">
+                    <img *ngIf="selectedAnnouncement.imageUrl" [src]="selectedAnnouncement.imageUrl"
+                        class="w-full h-full object-cover">
+                    <div class="absolute bottom-6 left-10">
+                        <span class="badge-classic bg-white shadow-sm border-none px-4 py-2">
+                            {{ getCategoryLabel(selectedAnnouncement.category) }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Content Container -->
+                <div class="max-w-4xl mx-auto px-6 md:px-16 py-12 space-y-10">
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center gap-3 text-slate-400 text-[11px] font-bold uppercase tracking-widest">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            {{ selectedAnnouncement.date }}
+                        </div>
+                        <h2 class="text-4xl font-bold text-slate-900 leading-tight">
+                            {{ selectedAnnouncement.title }}
+                        </h2>
+                        <div class="w-24 h-1.5 bg-odda-blue rounded-full"></div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="prose prose-slate max-w-none">
+                        <p class="text-slate-600 leading-relaxed text-lg whitespace-pre-wrap">
+                            {{ selectedAnnouncement.description }}
+                        </p>
+                    </div>
+
+                    <!-- Suggestions Divider -->
+                    <div class="pt-16 border-t border-slate-100">
+                        <h4 class="text-lg font-bold text-slate-900 mb-8 uppercase tracking-tight">Articles suggérés
+                        </h4>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div *ngFor="let suggestion of getSuggestedAnnouncements()"
+                                (click)="openDetails(suggestion)"
+                                class="group cursor-pointer border border-slate-50 p-4 rounded-2xl hover:bg-slate-50 transition-all">
+                                <div class="aspect-video rounded-xl overflow-hidden bg-slate-100 mb-4">
+                                    <img *ngIf="suggestion.imageUrl" [src]="suggestion.imageUrl"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <h5
+                                    class="font-bold text-sm leading-tight text-slate-800 line-clamp-2 group-hover:text-odda-blue">
+                                    {{ suggestion.title }}
+                                </h5>
+                                <span class="text-[9px] font-bold text-slate-400 uppercase block mt-2">{{
+                                    suggestion.date }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Info -->
+                    <div class="pt-10 border-t border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
+                                <img src="assets/img/logo-symbol.png" alt="Odda" class="w-6 opacity-30">
+                            </div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-tight">
+                                ODDA Technology <br />
+                                <span class="text-slate-900">Actualités & Presse</span>
+                            </div>
+                        </div>
+                        <button (click)="closeDetails()" class="btn-primary py-3 px-8 text-xs">
+                            Retour à la liste
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

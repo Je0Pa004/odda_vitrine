@@ -1,0 +1,84 @@
+<div class="min-h-screen bg-white flex flex-col">
+  <app-header *ngIf="activeSection() !== 'admin-dashboard'" [activeSection]="activeSection()"
+    (navChange)="setSection($event)"></app-header>
+
+  <main class="relative flex-grow">
+    <!-- HERO SECTION -->
+    <div [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'hero', 'hidden': activeSection() !== 'hero'}"
+      class="transition-all duration-700">
+      <app-hero (navChange)="setSection($event)"></app-hero>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'services', 'hidden': activeSection() !== 'services'}"
+      class="transition-all duration-700">
+      <app-services (navChange)="setSection($event)"></app-services>
+      <app-why-us (navChange)="setSection($event)"></app-why-us>
+    </div>
+
+    <!-- REALIZATIONS SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'realizations', 'hidden': activeSection() !== 'realizations'}"
+      class="transition-all duration-700">
+      <app-realizations (navChange)="setSection($event)"></app-realizations>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'about', 'hidden': activeSection() !== 'about'}"
+      class="transition-all duration-700">
+      <app-about (navChange)="setSection($event)"></app-about>
+    </div>
+
+    <!-- INTERNSHIP SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'internship', 'hidden': activeSection() !== 'internship'}"
+      class="transition-all duration-700">
+      <app-internship (navChange)="setSection($event)"></app-internship>
+    </div>
+
+    <!-- REFERENCES SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'references', 'hidden': activeSection() !== 'references'}"
+      class="transition-all duration-700">
+      <app-references (navChange)="setSection($event)"></app-references>
+    </div>
+
+    <!-- ANNOUNCEMENTS SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'announcements', 'hidden': activeSection() !== 'announcements'}"
+      class="transition-all duration-700">
+      <app-announcements (navChange)="setSection($any($event))"></app-announcements>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'contact', 'hidden': activeSection() !== 'contact'}"
+      class="transition-all duration-700">
+      <app-contact (navChange)="setSection($event)"></app-contact>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <div [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'login', 'hidden': activeSection() !== 'login'}"
+      class="transition-all duration-700">
+      <app-login (navChange)="setSection($event)"></app-login>
+    </div>
+
+    <!-- ORGANIZATION SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'organization', 'hidden': activeSection() !== 'organization'}"
+      class="transition-all duration-700">
+      <app-organization (navChange)="setSection($any($event))"></app-organization>
+    </div>
+
+    <!-- ADMIN DASHBOARD SECTION -->
+    <div
+      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'admin-dashboard', 'hidden': activeSection() !== 'admin-dashboard'}"
+      class="transition-all duration-700 relative z-[100]">
+      <app-admin-dashboard (navChange)="setSection($event)"></app-admin-dashboard>
+    </div>
+  </main>
+
+  <app-chatbot *ngIf="activeSection() !== 'admin-dashboard'"></app-chatbot>
+  <app-footer *ngIf="activeSection() !== 'admin-dashboard'" (navChange)="setSection($event)"></app-footer>
+</div>

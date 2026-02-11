@@ -1,0 +1,44 @@
+<section
+    class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#1a367c] pt-[150px] md:pt-[160px] pb-[120px]">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070"
+            alt="Backend Engineering" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-[#1a367c]/90"></div>
+    </div>
+
+    <div class="container-custom relative z-10 text-center">
+        <!-- Central Content Box -->
+        <div class="max-w-4xl mx-auto space-y-12">
+
+            <div class="space-y-6">
+                <!-- Removed Engineering Badge per user request -->
+
+                <!-- Main Institutional Title -->
+                <h1 class="text-5xl md:text-8xl font-black text-white leading-[1.05] tracking-tight uppercase">
+                    Propulser vos <br />
+                    <span class="text-[#ff7a1a]">Ambitions Digitales.</span>
+                </h1>
+
+                <!-- Sober Description -->
+                <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-medium">
+                    Odda Technology conçoit des solutions logicielles sur mesure pour les entreprises exigeantes.
+                    Sécurité, scalabilité et innovation au cœur de Lomé.
+                </p>
+            </div>
+
+            <!-- Static Buttons with Border Radius -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <button (click)="onNavClick('services')"
+                    class="bg-[#ff7a1a] text-white px-10 py-5 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-[#1a367c] transition-colors duration-200">
+                    Nos Solutions
+                </button>
+                <button (click)="onNavClick('contact')"
+                    class="border border-white/30 text-white px-10 py-5 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-[#1a367c] transition-colors duration-200">
+                    Nous Contacter
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section>
