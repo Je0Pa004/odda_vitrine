@@ -4,53 +4,85 @@
 
             <!-- Visual -->
             <div class="relative animate-reveal">
-                <div class="aspect-square bg-slate-50 rounded-2xl flex items-center justify-center p-12">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070"
-                        alt="Collaboration" class="rounded-xl shadow-lg ring-8 ring-white">
+                <div class="aspect-square flex items-center justify-center p-4 overflow-hidden">
+                    <img src="/images/odda_logo.webp" alt="Odda Logo"
+                        class="w-full h-auto object-contain transition-transform hover:scale-110 duration-1000">
                 </div>
                 <div
                     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-odda-blue/5 rounded-full -z-10 blur-3xl">
                 </div>
+                <!-- Badge Achievement -->
+                <div
+                    class="absolute -bottom-6 -right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 animate-slide-up flex items-center gap-4">
+                    <div class="flex items-center">
+                        <img src="/images/odda_logo.webp" alt="Odda Technology" class="h-12 w-auto object-contain">
+                    </div>
+                    <div>
+                        <p class="text-3xl font-black text-odda-blue tracking-tighter mb-1">Partenaire</p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Institutionnel de
+                            l'État</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Content -->
-            <div class="space-y-8 animate-reveal" style="animation-delay: 0.2s">
-                <div class="space-y-4">
-                    <span class="badge-classic text-odda-orange">Notre Histoire</span>
-                    <h2>Façonner l'Excellence Numérique au <span class="text-odda-blue">Togo</span>.</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">
-                        Odda Technology est née d'une ambition simple : apporter des solutions informatiques de classe
-                        mondiale aux acteurs économiques de la sous-région.
+            <div class="space-y-10 animate-reveal" style="animation-delay: 0.2s">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-blue-50 border border-blue-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-odda-blue animate-pulse"></span>
+                        <span class="text-[10px] font-black text-odda-blue uppercase tracking-widest">Présentation
+                            Générale</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight">
+                        L'accompagnement <span class="text-odda-blue">institutionnel</span> au cœur de l'innovation.
+                    </h2>
+                    <p class="text-lg text-slate-600 leading-relaxed font-medium">
+                        ODDA TECHNOLOGY est une structure spécialisée dans l’accompagnement institutionnel, la
+                        conception de solutions numériques et la gestion organisationnelle.
+                    </p>
+                    <p class="text-slate-500 leading-relaxed">
+                        Nous intervenons auprès des administrations publiques, des collectivités territoriales et des
+                        institutions nationales pour renforcer leurs capacités et optimiser leurs outils de gouvernance.
+                        Notre mission est de transformer les défis administratifs en opportunités numériques durables.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    <div class="space-y-3">
-                        <div class="w-10 h-10 bg-slate-50 rounded flex items-center justify-center text-odda-blue">
+                    <div
+                        class="space-y-4 p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-odda-blue transition-colors group">
+                        <div
+                            class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-odda-blue shadow-sm group-hover:bg-odda-blue group-hover:text-white transition-all">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-slate-900">Vision Agile</h4>
-                        <p class="text-sm text-slate-500">Nous nous adaptons aux besoins spécifiques de chaque client
-                            pour un résultat optimal.</p>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-2">Gouvernance Locale</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Appui stratégique aux collectivités
+                                territoriales pour une gestion décentralisée performante.</p>
+                        </div>
                     </div>
-                    <div class="space-y-3">
-                        <div class="w-10 h-10 bg-slate-50 rounded flex items-center justify-center text-odda-orange">
+                    <div
+                        class="space-y-4 p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-odda-orange transition-colors group">
+                        <div
+                            class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-odda-orange shadow-sm group-hover:bg-odda-orange group-hover:text-white transition-all">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-slate-900">Sûreté Totale</h4>
-                        <p class="text-sm text-slate-500">La confidentialité et la sécurité des données sont inscrites
-                            dans notre ADN.</p>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-2">Sûreté & Rigueur</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Engagement total pour la sécurité des
+                                données d'État et la transparence administrative.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="pt-6">
-                    <button class="btn-outline" (click)="onNavClick('contact')">En savoir plus sur l'équipe</button>
+                <div class="pt-6 flex flex-col sm:flex-row gap-4">
+                    <button class="btn-primary" (click)="onNavClick('contact')">Consulter notre Expertise</button>
+                    <button class="btn-outline" (click)="onNavClick('realizations')">Voir nos Réalisations</button>
                 </div>
             </div>
 

@@ -21,7 +21,6 @@ export class HeaderComponent {
     { id: 'realizations', label: 'PROJETS RÉALISÉS' },
     { id: 'services', label: 'SERVICES' },
     { id: 'about', label: 'À PROPOS' },
-    { id: 'references', label: 'RÉFÉRENCES' },
     { id: 'internship', label: 'DEMANDE' },
     { id: 'organization', label: 'EQUIPE' },
     { id: 'announcements', label: 'ANNONCES' },

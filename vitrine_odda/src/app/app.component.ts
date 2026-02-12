@@ -6,7 +6,6 @@ import { ServicesComponent } from './components/services/services.component';
 import { RealizationsComponent } from './components/realizations/realizations.component';
 import { WhyUsComponent } from './components/why-us/why-us.component';
 import { AboutComponent } from './components/about/about.component';
-import { ReferencesComponent } from './components/references/references.component';
 import { AnnouncementsComponent } from './components/announcements/announcements.component';
 import { InternshipComponent } from './components/internship/internship.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -27,7 +26,6 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     RealizationsComponent,
     WhyUsComponent,
     AboutComponent,
-    ReferencesComponent,
     AnnouncementsComponent,
     InternshipComponent,
     ContactComponent,

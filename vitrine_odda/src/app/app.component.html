@@ -37,12 +37,6 @@
       <app-internship (navChange)="setSection($event)"></app-internship>
     </div>
 
-    <!-- REFERENCES SECTION -->
-    <div
-      [ngClass]="{'opacity-100 translate-y-0': activeSection() === 'references', 'hidden': activeSection() !== 'references'}"
-      class="transition-all duration-700">
-      <app-references (navChange)="setSection($event)"></app-references>
-    </div>
 
     <!-- ANNOUNCEMENTS SECTION -->
     <div
@@ -80,5 +74,5 @@
   </main>
 
   <app-chatbot *ngIf="activeSection() !== 'admin-dashboard'"></app-chatbot>
-  <app-footer *ngIf="activeSection() !== 'admin-dashboard'" (navChange)="setSection($event)"></app-footer>
+  <app-footer *ngIf="activeSection() === 'hero'" (navChange)="setSection($event)"></app-footer>
 </div>

@@ -37,10 +37,47 @@ import { CommonModule } from '@angular/common';
     .branch-line-v {
        @apply w-1 bg-[#005a64] h-8 mx-auto;
     }
+    .member-grid-card {
+      @apply bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-2;
+    }
+    .member-img-container {
+      @apply aspect-[3/4] bg-slate-100 overflow-hidden relative;
+    }
+    .member-info {
+      @apply p-4 bg-white border-t border-slate-50 flex flex-col justify-center min-h-[100px];
+    }
   `
 })
 export class OrganizationComponent {
   @Output() navChange = new EventEmitter<string>();
+
+  teamMembers = [
+    {
+      name: 'M. BILANTE Addo',
+      role: 'Président Directeur Général',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      name: 'M. BILANTE Tchapo Alaza',
+      role: 'Directeur des Systèmes d\'Information (DSI)',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      name: 'M. TCHAMDJA Badi',
+      role: 'Responsable des Ressources Humaines',
+      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      name: 'Mlle ASSIH Constantine',
+      role: 'Secrétaire de Direction',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      name: 'M. TAKO Jos',
+      role: 'Ingénieur Informaticien',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800'
+    }
+  ];
 
   onNavClick(id: string) {
     this.navChange.emit(id);
